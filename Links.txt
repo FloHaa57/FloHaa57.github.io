@@ -1,0 +1,5 @@
+https://davidwalsh.name/browser-camera - Camera usage
+
+https://davidwalsh.name/convert-canvas-image - canvas to image
+
+http://www.inkfood.com/mobile-accelerometer-input/ - accelerometer usage

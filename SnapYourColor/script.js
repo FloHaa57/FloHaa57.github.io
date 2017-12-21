@@ -48,6 +48,16 @@ function setAccelerometerEventListener() {
 	}
 }
 
+function takeSnapshot() {
+	var canvas = document.getElementById('canvas');
+	var context = canvas.getContext('2d');
+	var video = document.getElementById('video');
+
+	document.getElementById("snapButton").addEventListener("click", function() {
+		context.drawImage(video, 0, 0, 700, 480);
+	});
+}
+
 function errorCallback() {
 	writeMessage("Failed to show camera stream");
 }

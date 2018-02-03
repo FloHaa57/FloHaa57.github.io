@@ -7,25 +7,52 @@
 	<title>SnapToColor</title>
 </head>
 <body>
+
+	<!-- start view and result view -->
 	<div id="content">
 
 		<div id="banner">
-		<h1>SNAP YOUR COLOR</h1>
+			<img id="logo" src="./logo.png">
 		</div>
 
+		<div id="startView">
+			<div id="introduction">
+				
+			</div>
+			<div id="startButton" onclick="showCameraView()">
+				<div id="startButtonText">Start</div>
+			</div>			
+		</div>
+
+		<div id="resultView">
+			<div id="resultColor"></div>
+			<div id="resultColorValues" class="text-input">
+				    <label for="rgb" id="rgbLabel">RGB</label>
+				    <input type="text" id="rgbOutput" name="rgb" placeholder="255 255 255">
+
+				    <label for="hex" id="hexLabel">HEX</label>
+				    <input type="text" id="hexOutput" name="hex" placeholder="23548540">
+			</div>
+		</div>
+
+
+		<!-- show some sensor infos -->
 		<div id="infoBox">
-
-			<div id="messageBox" class="infoItem">Message: </div>
-
 			<div id="ambient_light" class="infoItem">Ambient-Light:</div>
-
 			<div id="accelerotmeter" class="infoItem">Accelerometer:</div>
-
 		</div>		
 
-		<button id="button">Take Snapshot</button>
-		<video id="video" width="800" autoplay></video>
-		<canvas id="canvas" width="700"></canvas>
+	</div>
+
+	<!-- view to show the camera view and capture images in fullscreen-->
+	<div id="cameraView">
+
+		<video id="video" height="100%" autoplay></video>
+		<canvas id="canvas"></canvas>
+		
+		<div id="captureImageButton" onclick="captureImage()">
+			<div id="captureImageButtonText">That's my color!</div>
+		</div>
 
 	</div>	
 

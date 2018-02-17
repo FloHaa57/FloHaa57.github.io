@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="style.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="style_mobile.css" media="only screen and (max-width: 480px)">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript" src="script.js"></script>
 	<title>SnapToColor</title>
@@ -12,7 +14,7 @@
 	<div id="content">
 
 		<div id="banner">
-			<img id="logo" src="./logo.png">
+			<a href="./index.html"><img id="logo" src="./logo.png"></a>
 		</div>
 
 		<div id="startView">
@@ -31,7 +33,10 @@
 				    <input type="text" id="rgbOutput" name="rgb" placeholder="255 255 255">
 
 				    <label for="hex" id="hexLabel">HEX</label>
-				    <input type="text" id="hexOutput" name="hex" placeholder="23548540">
+				    <input type="text" id="hexOutput" name="hex" placeholder="#000000">
+			</div>
+			<div id="brightnessSlider">
+				<input id="slider" type="range" min="1" max="100" value="50">
 			</div>
 		</div>
 
@@ -42,6 +47,11 @@
 			<div id="accelerotmeter" class="infoItem">Accelerometer:</div>
 		</div>		
 
+	</div>
+
+	<!-- loading view -->
+	<div id="loadingView">
+		
 	</div>
 
 	<!-- view to show the camera view and capture images in fullscreen-->

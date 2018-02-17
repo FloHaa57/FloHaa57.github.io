@@ -1,9 +1,11 @@
+var originRGB;
+
 $(document).ready(function() {
 
 	setAmbientLightEventListener();
 	setAccelerometerEventListener();
-	startCameraStreaming();
-
+	//startCameraStreaming();
+	setSliderEventListener();
 });
 
 function startCameraStreaming() {
@@ -92,6 +94,7 @@ function captureImage() {
 
 	// capture image
 	var rgb = takeSnapshot();
+	originRGB = rgb;
 
 	$("#resultColor").css("background-color", "rgb(" + rgb.r + "," + rgb.g + "," + rgb.b + ")");
 	$("label").css("background-color", "rgb(" + rgb.r + "," + rgb.g + "," + rgb.b + ")");
@@ -130,4 +133,110 @@ function componentToHex(c) {
 
 function rgbToHex(r, g, b) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
+function setSliderEventListener() {
+	var slider = document.getElementById("slider");
+	slider.oninput = function() {
+		// update color brightness
+		alert(originRGB);
+	}
+}
+
+/*
+function startStream() {
+	MediaStreamTrack.getSources(function(sourceInfos) {
+	  var audioSource = null;
+	  var videoSource = null;
+
+	  for (var i = 0; i != sourceInfos.length; ++i) {
+	    var sourceInfo = sourceInfos[i];
+	    if (sourceInfo.kind === 'audio') {
+	      console.log(sourceInfo.id, sourceInfo.label || 'microphone');
+
+	      audioSource = sourceInfo.id;
+	    } else if (sourceInfo.kind === 'video') {
+	      console.log(sourceInfo.id, sourceInfo.label || 'camera');
+
+	      videoSource = sourceInfo.id;
+	    } else {
+	      console.log('Some other kind of source: ', sourceInfo);
+	    }
+	  }
+
+	  sourceSelected(audioSource, videoSource);
+	});
+}
+
+function sourceSelected(audioSource, videoSource) {
+  var constraints = {
+    audio: {
+      optional: [{sourceId: audioSource}]
+    },
+    video: {
+      optional: [{sourceId: videoSource}]
+    }
+  };
+
+  navigator.getUserMedia(constraints, successCallback, errorCallback);
+}
+
+function successCallback() {
+	var video = document.getElementById('video');
+	video.src = window.URL.createObjectURL(stream);
+	video.play()
+}
+*/
+
+function HSVtoRGB(h, s, v) {
+    var r, g, b, i, f, p, q, t;
+    if (arguments.length === 1) {
+        s = h.s, v = h.v, h = h.h;
+    }
+    i = Math.floor(h * 6);
+    f = h * 6 - i;
+    p = v * (1 - s);
+    q = v * (1 - f * s);
+    t = v * (1 - (1 - f) * s);
+    switch (i % 6) {
+        case 0: r = v, g = t, b = p; break;
+        case 1: r = q, g = v, b = p; break;
+        case 2: r = p, g = v, b = t; break;
+        case 3: r = p, g = q, b = v; break;
+        case 4: r = t, g = p, b = v; break;
+        case 5: r = v, g = p, b = q; break;
+    }
+    return {
+        r: Math.round(r * 255),
+        g: Math.round(g * 255),
+        b: Math.round(b * 255)
+    };
+}
+
+function rgbToHsv(r, g, b) {
+  r /= 255, g /= 255, b /= 255;
+
+  var max = Math.max(r, g, b), min = Math.min(r, g, b);
+  var h, s, v = max;
+
+  var d = max - min;
+  s = max == 0 ? 0 : d / max;
+
+  if (max == min) {
+    h = 0; // achromatic
+  } else {
+    switch (max) {
+      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+      case g: h = (b - r) / d + 2; break;
+      case b: h = (r - g) / d + 4; break;
+    }
+
+    h /= 6;
+  }
+
+  return {
+  	h: h,
+  	s: s,
+  	v : v
+  };
 }

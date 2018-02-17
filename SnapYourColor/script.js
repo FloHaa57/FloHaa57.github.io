@@ -45,11 +45,9 @@ function setAccelerometerEventListener() {
 			var slider = document.getElementById("slider");
 
 			if(xValue < -5) {
-				slider.value -= 1;
+				slider.value = parseInt(slider.value) - 1;
 			} else if (xValue > 5) {
-				alert(slider.value);
-				slider.value += 1;
-				alert(slider.value);
+				slider.value = parseInt(slider.value) + 1;
 			}
 
 			updateColorValues();
@@ -76,11 +74,6 @@ function takeSnapshot() {
 	var rgb = calculateColor(imageData);
 
 	return rgb;
-
-	// printing image on canvas obj
-	/*var image = new Image();
-	image.onload = calculateColor(image);
-	image.src = canvas.toDataURL("image/png");*/
 }
 
 function errorCallback() {
@@ -176,51 +169,6 @@ function setResultValues(rgb, storeColor) {
 		$("#resultColorStore").html("background-color", rgb.r + "_" + rgb.g + "_" + rgb.b);
 	}	
 }
-
-/*
-function startStream() {
-	MediaStreamTrack.getSources(function(sourceInfos) {
-	  var audioSource = null;
-	  var videoSource = null;
-
-	  for (var i = 0; i != sourceInfos.length; ++i) {
-	    var sourceInfo = sourceInfos[i];
-	    if (sourceInfo.kind === 'audio') {
-	      console.log(sourceInfo.id, sourceInfo.label || 'microphone');
-
-	      audioSource = sourceInfo.id;
-	    } else if (sourceInfo.kind === 'video') {
-	      console.log(sourceInfo.id, sourceInfo.label || 'camera');
-
-	      videoSource = sourceInfo.id;
-	    } else {
-	      console.log('Some other kind of source: ', sourceInfo);
-	    }
-	  }
-
-	  sourceSelected(audioSource, videoSource);
-	});
-}
-
-function sourceSelected(audioSource, videoSource) {
-  var constraints = {
-    audio: {
-      optional: [{sourceId: audioSource}]
-    },
-    video: {
-      optional: [{sourceId: videoSource}]
-    }
-  };
-
-  navigator.getUserMedia(constraints, successCallback, errorCallback);
-}
-
-function successCallback() {
-	var video = document.getElementById('video');
-	video.src = window.URL.createObjectURL(stream);
-	video.play()
-}
-*/
 
 function HSVtoRGB(h, s, v) {
     var r, g, b, i, f, p, q, t;

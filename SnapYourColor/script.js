@@ -1,8 +1,7 @@
 $(document).ready(function() {
 
 	setAmbientLightEventListener();
-	//startCameraStreaming();
-	setSliderEventListener();
+	startCameraStreaming();
 });
 
 function startCameraStreaming() {
@@ -95,6 +94,7 @@ function captureImage() {
 
 	$("#resultView").fadeIn();
 	setAccelerometerEventListener();
+	setSliderEventListener();
 }
 
 function calculateColor(imageData) {	
@@ -131,7 +131,6 @@ function rgbToHex(r, g, b) {
 function setSliderEventListener() {
 	var slider = document.getElementById("slider");
 	slider.oninput = function() {
-
 		updateColorValues();
 	}
 }
@@ -140,25 +139,27 @@ function updateColorValues() {
 	// update color brightness
 		color = $("#resultColorStore").html();
 		rbgColorArray = color.split("_");
+
 		r = parseInt(rbgColorArray[0]);
 		g = parseInt(rbgColorArray[1]);
 		b = parseInt(rbgColorArray[2]);
-
+		
 		hsv = RGBtoHSV(r, g, b);
 		hsv.v = slider.value / 1000;
 		rgb = HSVtoRGB(hsv);
-		
+
 		setResultValues(rgb, false);
 }
 
 function setResultValues(rgb, storeColor) {
+
 	$("#resultColor").css("background-color", "rgb(" + rgb.r + "," + rgb.g + "," + rgb.b + ")");	
 	$("label").css("background-color", "rgb(" + rgb.r + "," + rgb.g + "," + rgb.b + ")");
 	$("#rgbOutput").val(rgb.r + ", " + rgb.g + ", " + rgb.b);
 	$("#hexOutput").val(rgbToHex(rgb.r, rgb.g, rgb.b));
 
 	if(storeColor) {
-		$("#resultColorStore").html("background-color", rgb.r + "_" + rgb.g + "_" + rgb.b);
+		$("#resultColorStore").html(rgb.r + "_" + rgb.g + "_" + rgb.b);
 	}	
 }
 
@@ -191,7 +192,7 @@ function HSVtoRGB(h, s, v) {
     };
 }
 
-function RGBToHSV(r, g, b) {
+function RGBtoHSV(r, g, b) {
   r /= 255, g /= 255, b /= 255;
 
   var max = Math.max(r, g, b), min = Math.min(r, g, b);

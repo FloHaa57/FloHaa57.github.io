@@ -1,5 +1,3 @@
-var originRGB;
-
 $(document).ready(function() {
 
 	setAmbientLightEventListener();
@@ -43,14 +41,16 @@ function setAccelerometerEventListener() {
 
 			$("#accelerotmeter").html("X: " + xValue + ", Y: " + yValue + ", Rotation: " + rotation);
 
-			// update slider value
+			// update slider value and color 
 			var slider = document.getElementById("slider");
 
 			if(xValue < -5) {
-				slider.value -= 1;
+				slider.value -= 0.1;
 			} else if (xValue > 5) {
-				slider.value += 1;
+				slider.value += 0.1;
 			}
+
+			updateColorValues();
 			
 		}, true);		
 		
@@ -103,12 +103,9 @@ function captureImage() {
 
 	// capture image
 	var rgb = takeSnapshot();
-	originRGB = rgb;
 
-	$("#resultColor").css("background-color", "rgb(" + rgb.r + "," + rgb.g + "," + rgb.b + ")");
-	$("label").css("background-color", "rgb(" + rgb.r + "," + rgb.g + "," + rgb.b + ")");
-	$("#rgbOutput").val(rgb.r + ", " + rgb.g + ", " + rgb.b);
-	$("#hexOutput").val(rgbToHex(rgb.r, rgb.g, rgb.b));
+	// update values on screen
+	setResultValues(rgb, true);
 
 	$("#resultView").fadeIn();
 }
@@ -147,9 +144,35 @@ function rgbToHex(r, g, b) {
 function setSliderEventListener() {
 	var slider = document.getElementById("slider");
 	slider.oninput = function() {
-		// update color brightness
-		alert(originRGB);
+
+		updateColorValues();
 	}
+}
+
+function updateColorValues() {
+	// update color brightness
+		color = $("#resultColorStore").html();
+		rbgColorArray = color.split("_");
+		r = parseInt(rbgColorArray[0]);
+		g = parseInt(rbgColorArray[1]);
+		b = parseInt(rbgColorArray[2]);
+
+		hsv = rgbToHsv(r, g, b);
+		hsv.v = slider.value / 100;
+		rgb = HSVtoRGB(hsv);
+		
+		setResultValues(rgb, false);
+}
+
+function setResultValues(rgb, storeColor) {
+	$("#resultColor").css("background-color", "rgb(" + rgb.r + "," + rgb.g + "," + rgb.b + ")");	
+	$("label").css("background-color", "rgb(" + rgb.r + "," + rgb.g + "," + rgb.b + ")");
+	$("#rgbOutput").val(rgb.r + ", " + rgb.g + ", " + rgb.b);
+	$("#hexOutput").val(rgbToHex(rgb.r, rgb.g, rgb.b));
+
+	if(storeColor) {
+		$("#resultColorStore").html("background-color", rgb.r + "_" + rgb.g + "_" + rgb.b);
+	}	
 }
 
 /*

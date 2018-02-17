@@ -117,6 +117,10 @@ body {
 	border-radius: 125px;
 }
 
+#resultColorStore {
+	display: none;
+}
+
 #resultColorValues {
 	display: block;
 	position: absolute;

@@ -73,9 +73,7 @@ body {
 	min-width: 400px;
 
 	margin: auto;
-
 	margin-top: 50px;
-
 }
 
 #introduction {
@@ -89,7 +87,7 @@ body {
 
 	color: lightgrey;
 	font-family: Arial, sens-serif;
-	font-size: 1.4em;
+	font-size: 1.4vw;
 	text-align: center;
 }
 
@@ -101,7 +99,7 @@ body {
 	height: 40%;
 
 	margin: auto;
-	top: 10px;
+	bottom: 10px;
 	background: var(--button);
 
 	border-radius: 50%;

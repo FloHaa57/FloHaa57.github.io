@@ -47,7 +47,9 @@ function setAccelerometerEventListener() {
 			if(xValue < -5) {
 				slider.value -= 1;
 			} else if (xValue > 5) {
+				alert(slider.value);
 				slider.value += 1;
+				alert(slider.value);
 			}
 
 			updateColorValues();

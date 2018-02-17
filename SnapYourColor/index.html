@@ -18,52 +18,55 @@
 		</div>
 
 		<div id="startView">
-			<div id="introduction">
+			<div id="startViewContent">
+				<div id="introduction">
 				
-			</div>
-			<div id="startButton" onclick="showCameraView()">
-				<div id="startButtonText">Start</div>
-			</div>			
+				</div>
+				<div id="startButton" onclick="showCameraView()">
+					<div id="startButtonText">Start</div>
+				</div>	
+			</div>						
 		</div>
 
 		<div id="resultView">
-			<div id="resultColor"></div>
-			<div id="resultColorStore">255_255_0</div>
-			<div id="resultColorValues" class="text-input">
-				    <label for="rgb" id="rgbLabel">RGB</label>
-				    <input type="text" id="rgbOutput" name="rgb" placeholder="255 255 255">
+			<div id="resultViewContent">
+				<div id="resultColor"></div>
+				<div id="resultColorStore">255_255_0</div>
+				<div id="resultColorValues" class="text-input">
+					    <label for="rgb" id="rgbLabel"><span class="label">RGB</span></label>
+					    <input type="text" id="rgbOutput" name="rgb" placeholder="255 255 255">
 
-				    <label for="hex" id="hexLabel">HEX</label>
-				    <input type="text" id="hexOutput" name="hex" placeholder="#000000">
-			</div>
-			<div id="brightnessSlider">
-				<input id="slider" type="range" min="1" max="1000" value="500">
-			</div>
+					    <label for="hex" id="hexLabel"><span class="label">HEX</span></label>
+					    <input type="text" id="hexOutput" name="hex" placeholder="#000000">
+				</div>
+				<div id="brightnessSlider">
+					<input id="slider" type="range" min="1" max="1000" value="500">
+				</div>
+			</div>			
 		</div>
-
 
 		<!-- show some sensor infos -->
 		<div id="infoBox">
 			<div id="ambient_light" class="infoItem">Ambient-Light:</div>
 			<div id="accelerotmeter" class="infoItem">Accelerometer:</div>
-		</div>		
+		</div>	
 
-	</div>
-
-	<!-- loading view -->
-	<div id="loadingView">
-		
-	</div>
-
-	<!-- view to show the camera view and capture images in fullscreen-->
-	<div id="cameraView">
-
-		<video id="video" height="100%" autoplay></video>
-		<canvas id="canvas"></canvas>
-		
-		<div id="captureImageButton" onclick="captureImage()">
-			<div id="captureImageButtonText">That's my color!</div>
+		<!-- loading view -->
+		<div id="loadingView">
+			
 		</div>
+
+		<!-- view to show the camera view and capture images in fullscreen-->
+		<div id="cameraView">
+
+			<video id="video" height="100%" autoplay></video>
+			<canvas id="canvas"></canvas>
+			
+			<div id="captureImageButton" onclick="captureImage()">
+				<div id="captureImageButtonText">That's my color!</div>
+			</div>
+
+		</div>		
 
 	</div>	
 

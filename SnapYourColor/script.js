@@ -1,13 +1,11 @@
 $(document).ready(function() {
 
 	setAmbientLightEventListener();
-	setAccelerometerEventListener();
 	//startCameraStreaming();
 	setSliderEventListener();
 });
 
 function startCameraStreaming() {
-
 	var video = document.getElementById('video');
 
 	if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {	    
@@ -20,7 +18,6 @@ function startCameraStreaming() {
 }
 
 function setAmbientLightEventListener() {
-
 		window.addEventListener("devicelight", function (light) {
     		var ambientlight = light.value;
     		$("#ambient_light").html("Ambient-Light in lux: " + ambientlight);
@@ -29,7 +26,6 @@ function setAmbientLightEventListener() {
 }	
 
 function setAccelerometerEventListener() {
-
 	if (window.DeviceOrientationEvent) {
 
 		window.addEventListener("deviceorientation", function(event) 
@@ -43,11 +39,12 @@ function setAccelerometerEventListener() {
 
 			// update slider value and color 
 			var slider = document.getElementById("slider");
+			currentSliderValue = parseInt(slider.value);
 
-			if(xValue < -5) {
-				slider.value = parseInt(slider.value) - 1;
-			} else if (xValue > 5) {
-				slider.value = parseInt(slider.value) + 1;
+			if(xValue < -5 && currentSliderValue > 0) {
+				slider.value = currentSliderValue - 1;
+			} else if (xValue > 5 && currentSliderValue < 1000) {
+				slider.value = currentSliderValue + 1;
 			}
 
 			updateColorValues();
@@ -55,7 +52,7 @@ function setAccelerometerEventListener() {
 		}, true);		
 		
 	} else {		
-		writeMessage("Accelerotmeter not available");
+		alert("Accelerotmeter not available");
 	}
 }
 
@@ -77,13 +74,7 @@ function takeSnapshot() {
 }
 
 function errorCallback() {
-	writeMessage("Failed to show camera stream");
-}
-
-function writeMessage(message) {
-	var msgs = $("#messagBox").text();
-	msgs = msgs + "<br/>" + message;
-	$("#messagBox").html(msgs);
+	// TODO: error callback
 }
 
 function showCameraView() {
@@ -103,6 +94,7 @@ function captureImage() {
 	setResultValues(rgb, true);
 
 	$("#resultView").fadeIn();
+	setAccelerometerEventListener();
 }
 
 function calculateColor(imageData) {	
@@ -152,7 +144,7 @@ function updateColorValues() {
 		g = parseInt(rbgColorArray[1]);
 		b = parseInt(rbgColorArray[2]);
 
-		hsv = rgbToHsv(r, g, b);
+		hsv = RGBtoHSV(r, g, b);
 		hsv.v = slider.value / 1000;
 		rgb = HSVtoRGB(hsv);
 		
@@ -172,14 +164,17 @@ function setResultValues(rgb, storeColor) {
 
 function HSVtoRGB(h, s, v) {
     var r, g, b, i, f, p, q, t;
+
     if (arguments.length === 1) {
         s = h.s, v = h.v, h = h.h;
     }
+
     i = Math.floor(h * 6);
     f = h * 6 - i;
     p = v * (1 - s);
     q = v * (1 - f * s);
     t = v * (1 - (1 - f) * s);
+
     switch (i % 6) {
         case 0: r = v, g = t, b = p; break;
         case 1: r = q, g = v, b = p; break;
@@ -188,6 +183,7 @@ function HSVtoRGB(h, s, v) {
         case 4: r = t, g = p, b = v; break;
         case 5: r = v, g = p, b = q; break;
     }
+
     return {
         r: Math.round(r * 255),
         g: Math.round(g * 255),
@@ -195,7 +191,7 @@ function HSVtoRGB(h, s, v) {
     };
 }
 
-function rgbToHsv(r, g, b) {
+function RGBToHSV(r, g, b) {
   r /= 255, g /= 255, b /= 255;
 
   var max = Math.max(r, g, b), min = Math.min(r, g, b);

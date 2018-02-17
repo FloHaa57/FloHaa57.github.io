@@ -45,9 +45,9 @@ function setAccelerometerEventListener() {
 			var slider = document.getElementById("slider");
 
 			if(xValue < -5) {
-				slider.value -= 0.1;
+				slider.value -= 1;
 			} else if (xValue > 5) {
-				slider.value += 0.1;
+				slider.value += 1;
 			}
 
 			updateColorValues();
@@ -158,7 +158,7 @@ function updateColorValues() {
 		b = parseInt(rbgColorArray[2]);
 
 		hsv = rgbToHsv(r, g, b);
-		hsv.v = slider.value / 100;
+		hsv.v = slider.value / 1000;
 		rgb = HSVtoRGB(hsv);
 		
 		setResultValues(rgb, false);

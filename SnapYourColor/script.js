@@ -42,6 +42,15 @@ function setAccelerometerEventListener() {
 			var rotation = Math.round(event.alpha);
 
 			$("#accelerotmeter").html("X: " + xValue + ", Y: " + yValue + ", Rotation: " + rotation);
+
+			// update slider value
+			var slider = document.getElementById("slider");
+
+			if(xValue < -5) {
+				slider.value -= 1;
+			} else if (xValue > 5) {
+				slider.value += 1;
+			}
 			
 		}, true);		
 		

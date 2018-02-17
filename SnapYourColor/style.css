@@ -8,6 +8,11 @@
   	--detail2: #F24738;
   	--text: black;
   	--button: #ADFF2F;
+
+  	--startViewDisplay: none;
+  	--resultViewDisplay: block;
+  	--cameraViewDisplay: none;
+  	--infoBoxDisplay: none;
 }
 
 * {
@@ -45,7 +50,7 @@ body {
 
 /* --------------- START VIEW ----------------------*/
 #startView {
-	display: none;
+	display: var(--startViewDisplay);
 	position: relative;
 
 	width: 100%;
@@ -89,7 +94,7 @@ body {
 /* --------------- RESULT VIEW ----------------------*/
 
 #resultView {
-	display: none;
+	display: var(--resultViewDisplay);
 	position: relative;
 
 	width: 100%;
@@ -190,7 +195,7 @@ label {
 
 /* --------------- CAMERA VIEW ----------------------*/
 #cameraView {
-	display: none;
+	display: var(--cameraViewDisplay);
 	position: absolute;
 	z-index: 998;
 
@@ -235,7 +240,7 @@ label {
 }
 
 #infoBox {
-	display: block;
+	display: var(--infoBoxDisplay);
 	width: 700px;
 	height: auto;
 

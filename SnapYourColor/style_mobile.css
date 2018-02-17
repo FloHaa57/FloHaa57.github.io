@@ -47,7 +47,8 @@ body {
 	display: block;
 	position: relative;
 
-	height: 100%;
+	width: 100%;
+
 	margin: auto;
 	padding-top: 0px;
 }
@@ -88,7 +89,7 @@ body {
 
 	color: lightgrey;
 	font-family: Arial, sens-serif;
-	font-size: 1.3em;
+	font-size: 1.5em;
 	text-align: center;
 }
 
@@ -233,6 +234,7 @@ label {
 
     background: var(--background);
     outline: none; 
+    border: 0px;
 }
 
 
@@ -243,7 +245,7 @@ label {
 	z-index: 998;
 
 	width: 100%;
-	height: 70%;
+	height: 100%;
 
 	top: 20px;
 

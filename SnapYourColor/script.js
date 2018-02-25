@@ -1,6 +1,5 @@
 $(document).ready(function() {
 	initText();
-	screen.lockOrientation('portrait');
 });
 
 var WELCOME_TEXT = "Welcome to Snap Your Color </br></br></br> Press START to take a picture of your desired color. </br> Afterwards you get the RGB and HEX values of your color. </br> You can also change the brightness of the color using the slider below the values.";
@@ -15,7 +14,7 @@ function chooseStylesheet() {
 	if (WURFL.is_mobile) {
     	fileref.setAttribute("href", "style_mobile.css");
 	} else {
-		fileref.setAttribute("href", "style.css");
+		fileref.setAttribute("href", "style_mobile.css");
 	}
 
 	// load CSS

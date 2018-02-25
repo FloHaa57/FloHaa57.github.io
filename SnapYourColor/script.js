@@ -14,7 +14,7 @@ function chooseStylesheet() {
 	if (WURFL.is_mobile) {
     	fileref.setAttribute("href", "style_mobile.css");
 	} else {
-		fileref.setAttribute("href", "style_mobile.css");
+		fileref.setAttribute("href", "style.css");
 	}
 
 	// load CSS

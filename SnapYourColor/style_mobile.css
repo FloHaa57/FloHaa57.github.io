@@ -87,7 +87,7 @@ body {
 
 	color: lightgrey;
 	font-family: Arial, sens-serif;
-	font-size: 3em;
+	font-size: 1.5em;
 	text-align: center;
 }
 
@@ -95,14 +95,14 @@ body {
 	display: table;
 	position: relative;
 
-	width: 50%;
-	height: 40%;
+	width: 70%;
+	height: 30%;
 
 	margin: auto;
 	bottom: 10px;
 	border: 2px solid var(--button);
 
-	border-radius: 50%;
+	border-radius: 3%;
 	cursor: pointer;
 }
 

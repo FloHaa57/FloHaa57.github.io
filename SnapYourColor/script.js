@@ -1,8 +1,37 @@
-$(document).ready(function() {
+WELCOME_TEXT = "Welcome to Snap Your Color </br></br></br> Press START to take a picture of your desired color. </br> Afterwards you get the RGB and HEX values of your color. </br> You can also change the brightness of the color using the slider below the values. </br> Have fun!";
+WELCOME_TEXT_MOBILE = "Welcome to Snap Your Color Mobile! </br> ___</br> Press START to take a picture of your desired color. </br> Afterwards you get the RGB and HEX values of your color. </br> You can also change the brightness of the color using the slider by turning your phone. </br> Have fun!";
 
-	setAmbientLightEventListener();
-	startCameraStreaming();
+$(document).ready(function() {
+	initText();
 });
+
+// using WURFL to distinguish between desktop and mobile devices
+function chooseStylesheet() {
+	alert("choosing stylesheet now!");
+	var fileref = document.createElement("link");
+	fileref.setAttribute("rel", "stylesheet");
+	fileref.setAttribute("type", "text/css");
+
+	if (WURFL.is_mobile === true && WURFL.form_factor === "Smartphone") {
+    	fileref.setAttribute("href", "css/style_mobile.css");
+	} else {
+		fileref.setAttribute("href", "css/style.css");
+	}
+
+	// load CSS
+	document.getElementsByTagName("head")[0].appendChild(fileref);
+}
+
+function initText() {
+	// using WURFL to decide which welcome text to show
+	if (WURFL.is_mobile === true && WURFL.form_factor === "Smartphone") {
+    	var $("#introduction").html(WELCOME_TEXT_MOBILE);
+	} else {
+		var $("#introduction").html(WELCOME_TEXT);
+	}
+}
+
+// **************** Events ******************
 
 function startCameraStreaming() {
 	var video = document.getElementById('video');
@@ -16,25 +45,20 @@ function startCameraStreaming() {
 
 }
 
-function setAmbientLightEventListener() {
-		window.addEventListener("devicelight", function (light) {
-    		var ambientlight = light.value;
-    		$("#ambient_light").html("Ambient-Light in lux: " + ambientlight);
-		});
-
-}	
+function setSliderEventListener() {
+	var slider = document.getElementById("slider");
+	slider.oninput = function() {
+		updateColorValues();
+	}
+}
 
 function setAccelerometerEventListener() {
 	if (window.DeviceOrientationEvent) {
 
 		window.addEventListener("deviceorientation", function(event) 
-		{
-			
+		{			
+			// getting gamma value from accelerometer
 			var xValue = Math.round(event.gamma);
-			var yValue = Math.round(event.beta);
-			var rotation = Math.round(event.alpha);
-
-			$("#accelerotmeter").html("X: " + xValue + ", Y: " + yValue + ", Rotation: " + rotation);
 
 			// update slider value and color 
 			var slider = document.getElementById("slider");
@@ -51,8 +75,36 @@ function setAccelerometerEventListener() {
 		}, true);		
 		
 	} else {		
-		alert("Accelerotmeter not available");
+		alert("Accelerotmeter not available to control the slider.");
 	}
+}
+
+function errorCallback() {
+	alert("You have to allow the camera use first!");
+	$("#cameraView").fadeOut();
+	$("#startView").fadeIn();
+}
+
+// **************** Main functionality ******************
+
+function showCameraView() {
+	$("#startView").fadeOut();
+	startCameraStreaming();
+	$("#cameraView").fadeIn();
+}
+
+function captureImage() {
+	$("#cameraView").fadeOut();
+
+	// capture image
+	var rgb = takeSnapshot();
+
+	// update values on screen
+	setResultValues(rgb, true);
+
+	$("#resultView").fadeIn();
+	setAccelerometerEventListener();
+	setSliderEventListener();
 }
 
 function takeSnapshot() {
@@ -70,31 +122,6 @@ function takeSnapshot() {
 	var rgb = calculateColor(imageData);
 
 	return rgb;
-}
-
-function errorCallback() {
-	// TODO: error callback
-}
-
-function showCameraView() {
-	$("#startView").fadeOut();
-	$("#cameraView").fadeIn();
-}
-
-function captureImage() {
-
-	// show loading view
-	$("#cameraView").fadeOut();
-
-	// capture image
-	var rgb = takeSnapshot();
-
-	// update values on screen
-	setResultValues(rgb, true);
-
-	$("#resultView").fadeIn();
-	setAccelerometerEventListener();
-	setSliderEventListener();
 }
 
 function calculateColor(imageData) {	
@@ -128,31 +155,24 @@ function rgbToHex(r, g, b) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
-function setSliderEventListener() {
-	var slider = document.getElementById("slider");
-	slider.oninput = function() {
-		updateColorValues();
-	}
-}
-
 function updateColorValues() {
 	// update color brightness
-		color = $("#resultColorStore").html();
-		rbgColorArray = color.split("_");
+	var color = $("#resultColorStore").html();
+	var slider = document.getElementById("slider");
+	var rbgColorArray = color.split("_");
 
-		r = parseInt(rbgColorArray[0]);
-		g = parseInt(rbgColorArray[1]);
-		b = parseInt(rbgColorArray[2]);
+	var r = parseInt(rbgColorArray[0]);
+	var g = parseInt(rbgColorArray[1]);
+	var b = parseInt(rbgColorArray[2]);
 		
-		hsv = RGBtoHSV(r, g, b);
-		hsv.v = slider.value / 1000;
-		rgb = HSVtoRGB(hsv);
+	var hsv = RGBtoHSV(r, g, b);
+	hsv.v = slider.value / 1000;
+	var rgb = HSVtoRGB(hsv);
 
-		setResultValues(rgb, false);
+	setResultValues(rgb, false);
 }
 
 function setResultValues(rgb, storeColor) {
-
 	$("#resultColor").css("background-color", "rgb(" + rgb.r + "," + rgb.g + "," + rgb.b + ")");	
 	$("label").css("background-color", "rgb(" + rgb.r + "," + rgb.g + "," + rgb.b + ")");
 	$("#rgbOutput").val(rgb.r + ", " + rgb.g + ", " + rgb.b);
@@ -160,6 +180,12 @@ function setResultValues(rgb, storeColor) {
 
 	if(storeColor) {
 		$("#resultColorStore").html(rgb.r + "_" + rgb.g + "_" + rgb.b);
+
+		// set slider to initial brightness value
+		var hsv = RGBtoHSV(r, g, b);
+		var newValue = hsv.v * 1000;
+		var slider = document.getElementById("slider");
+		slider.value = parseInt(newValue);		
 	}	
 }
 

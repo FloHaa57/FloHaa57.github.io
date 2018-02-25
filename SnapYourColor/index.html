@@ -1,78 +1,60 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-	<link rel="stylesheet" type="text/css" href="style.css" media="screen">
-	<link rel="stylesheet" type="text/css" href="style_mobile.css" media="only screen and (max-width: 480px)">
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script type="text/javascript" src="script.js"></script>
-	<title>Snap Your Color</title>
-</head>
-<body>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script type="text/javascript" src="//wurfl.io/wurfl.js"></script>
+		<script type="text/javascript" src="script.js"></script>
+		<title>Snap Your Color</title>
+	</head>
 
-	<!-- start view and result view -->
-	<div id="content">
+	<body onload="chooseStylesheet();">
+		<div id="content">
 
-		<div id="banner">
-			<a href="./index.html"><img id="logo" src="./logo.png"></a>
-		</div>
-
-		<div id="startView">
-			<div id="startViewContent">
-				<div id="introduction">
-				Welcome to Snap Your Color! </br> ___</br>
-				Press START to capture an image that shows your desired color. </br>
-				Afterwards you get the RGB and HEX values of your color. </br>
-				You can also change the brightness of the color using the slider below the values. </br>
-				Have fun!
-				</div>
-				<div id="startButton" onclick="showCameraView()">
-					<div id="startButtonText">START</div>
-				</div>	
-			</div>						
-		</div>
-
-		<div id="resultView">
-			<div id="resultViewContent">
-				<div id="resultColor"></div>
-				<div id="resultColorStore">255_255_0</div>
-				<div id="resultColorValues" class="text-input">
-					    <label for="rgb" id="rgbLabel"><span class="label">RGB</span></label>
-					    <input type="text" id="rgbOutput" name="rgb" placeholder="255 255 255">
-
-					    <label for="hex" id="hexLabel"><span class="label">HEX</span></label>
-					    <input type="text" id="hexOutput" name="hex" placeholder="#000000">
-				</div>
-				<div id="brightnessSlider">
-					<input id="slider" type="range" min="1" max="1000" value="500">
-				</div>
-			</div>			
-		</div>
-
-		<!-- show some sensor infos -->
-		<div id="infoBox">
-			<div id="ambient_light" class="infoItem">Ambient-Light:</div>
-			<div id="accelerotmeter" class="infoItem">Accelerometer:</div>
-		</div>	
-
-		<!-- loading view -->
-		<div id="loadingView">
-			
-		</div>
-
-		<!-- view to show the camera view and capture images in fullscreen-->
-		<div id="cameraView">
-
-			<video id="video" autoplay></video>
-			<canvas id="canvas"></canvas>
-			
-			<div id="captureImageButton" onclick="captureImage()">
-				<div id="captureImageButtonText">That's my color!</div>
+			<div id="banner">
+				<a href="./index.html"><img id="logo" src="./logo.png"></a>
 			</div>
 
-		</div>		
+			<!-- first view -->
+			<div id="startView">
+				<div id="startViewContent">
+					<div id="introduction">
+					
+					</div>
+					<div id="startButton" onclick="showCameraView()">
+						<div id="startButtonText">START</div>
+					</div>	
+				</div>						
+			</div>
 
-	</div>	
+			<!-- view to show the camera view and capture images in fullscreen-->
+			<div id="cameraView">
+				<video id="video" autoplay></video>
+				<canvas id="canvas"></canvas>
+				
+				<div id="captureImageButton" onclick="captureImage()">
+					<div id="captureImageButtonText">That's my color!</div>
+				</div>
+			</div>	
 
-</body>
+			<!-- result view -->
+			<div id="resultView">
+				<div id="resultViewContent">
+					<div id="resultColor"></div>
+					<div id="resultColorStore">255_255_0</div>
+					<div id="resultColorValues" class="text-input">
+						    <label for="rgb" id="rgbLabel"><span class="label">RGB</span></label>
+						    <input type="text" id="rgbOutput" name="rgb" placeholder="255 255 255">
+
+						    <label for="hex" id="hexLabel"><span class="label">HEX</span></label>
+						    <input type="text" id="hexOutput" name="hex" placeholder="#000000">
+					</div>
+					<div id="brightnessSlider">
+						<input id="slider" type="range" min="1" max="1000" value="500">
+					</div>
+				</div>			
+			</div>	
+
+		</div>
+	</body>
 </html>

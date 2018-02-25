@@ -6,7 +6,7 @@
   	--infoBox: #851934;
   	--detail1: #03A694;
   	--detail2: #F24738;
-  	--text: black;
+  	--text: #ADFF2F;
   	--button: #ADFF2F;
 
   	--startViewDisplay: block;
@@ -100,7 +100,7 @@ body {
 
 	margin: auto;
 	bottom: 10px;
-	background: var(--button);
+	border: 2px solid var(--button);
 
 	border-radius: 50%;
 	cursor: pointer;
@@ -256,13 +256,13 @@ label {
 	position: relative;
 
 	width: 80%;
-	height: 10%;
+	height: 15%;
 	min-width: 100px;
 
 	margin: auto;
 	top: -15%;
 
-	border-radius: 5%;
+	border-radius: 3%;
 	background: var(--button);
 	cursor: pointer;
 }
@@ -276,7 +276,7 @@ label {
 
 	vertical-align: middle;
 
-	color: var(--text);
+	color: black;
 	font-family: Helvetica, sens-serif;
 	font-size: 1.5em;
 	text-align: center;

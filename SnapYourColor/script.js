@@ -1,21 +1,20 @@
-WELCOME_TEXT = "Welcome to Snap Your Color </br></br></br> Press START to take a picture of your desired color. </br> Afterwards you get the RGB and HEX values of your color. </br> You can also change the brightness of the color using the slider below the values. </br> Have fun!";
-WELCOME_TEXT_MOBILE = "Welcome to Snap Your Color Mobile! </br> ___</br> Press START to take a picture of your desired color. </br> Afterwards you get the RGB and HEX values of your color. </br> You can also change the brightness of the color using the slider by turning your phone. </br> Have fun!";
-
 $(document).ready(function() {
 	initText();
 });
 
+var WELCOME_TEXT = "Welcome to Snap Your Color </br></br></br> Press START to take a picture of your desired color. </br> Afterwards you get the RGB and HEX values of your color. </br> You can also change the brightness of the color using the slider below the values.";
+var WELCOME_TEXT_MOBILE = "Welcome to Snap Your Color Mobile! </br></br></br> Press START to take a picture of your desired color. </br> Afterwards you get the RGB and HEX values of your color. </br> You can also change the brightness of the color using the slider by turning your phone.";
+
 // using WURFL to distinguish between desktop and mobile devices
 function chooseStylesheet() {
-	alert("choosing stylesheet now!");
 	var fileref = document.createElement("link");
 	fileref.setAttribute("rel", "stylesheet");
 	fileref.setAttribute("type", "text/css");
 
 	if (WURFL.is_mobile === true && WURFL.form_factor === "Smartphone") {
-    	fileref.setAttribute("href", "css/style_mobile.css");
+    	fileref.setAttribute("href", "style_mobile.css");
 	} else {
-		fileref.setAttribute("href", "css/style.css");
+		fileref.setAttribute("href", "style.css");
 	}
 
 	// load CSS
@@ -25,13 +24,13 @@ function chooseStylesheet() {
 function initText() {
 	// using WURFL to decide which welcome text to show
 	if (WURFL.is_mobile === true && WURFL.form_factor === "Smartphone") {
-    	var $("#introduction").html(WELCOME_TEXT_MOBILE);
+    	$("#introduction").html(WELCOME_TEXT_MOBILE);
 	} else {
-		var $("#introduction").html(WELCOME_TEXT);
+		$("#introduction").html(WELCOME_TEXT);
 	}
 }
 
-// **************** Events ******************
+// ----------- Events -----------
 
 function startCameraStreaming() {
 	var video = document.getElementById('video');
@@ -182,10 +181,10 @@ function setResultValues(rgb, storeColor) {
 		$("#resultColorStore").html(rgb.r + "_" + rgb.g + "_" + rgb.b);
 
 		// set slider to initial brightness value
-		var hsv = RGBtoHSV(r, g, b);
+		var hsv = RGBtoHSV(rgb.r, rgb.g, rgb.b);
 		var newValue = hsv.v * 1000;
 		var slider = document.getElementById("slider");
-		slider.value = parseInt(newValue);		
+		slider.value = parseInt(newValue);
 	}	
 }
 

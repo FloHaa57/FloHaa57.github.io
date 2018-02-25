@@ -11,7 +11,7 @@ function chooseStylesheet() {
 	fileref.setAttribute("rel", "stylesheet");
 	fileref.setAttribute("type", "text/css");
 
-	if (WURFL.is_mobile === true && WURFL.form_factor === "Smartphone") {
+	if (WURFL.is_mobile) {
     	fileref.setAttribute("href", "style_mobile.css");
 	} else {
 		fileref.setAttribute("href", "style.css");

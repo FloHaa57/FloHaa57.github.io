@@ -1,9 +1,6 @@
-
 :root {
 	--banner: #181818;
-	--headline: #F24738;
   	--background: #181818;
-  	--infoBox: #851934;
   	--detail1: #03A694;
   	--detail2: #F24738;
   	--text: #ADFF2F;
@@ -12,7 +9,10 @@
   	--startViewDisplay: block;
   	--resultViewDisplay: none;
   	--cameraViewDisplay: none;
-  	--infoBoxDisplay: none;
+}
+
+@media (orientation: landscape) {
+	
 }
 
 * {
@@ -99,7 +99,7 @@ body {
 	height: 30%;
 
 	margin: auto;
-	bottom: 10px;
+	top: 50px;
 	border: 2px solid var(--button);
 
 	border-radius: 3%;
@@ -121,8 +121,66 @@ body {
 	text-align: center;
 }
 
-/* --------------- RESULT VIEW ----------------------*/
+/* --------------- CAMERA VIEW ----------------------*/
+#cameraView {
+	display: var(--cameraViewDisplay);
+	position: relative;
+	z-index: 998;
 
+	width: 100%;
+	height: 80%;
+
+	top: 20px;
+
+	background: var(--background)
+}
+
+#captureImageButton {
+	z-index: 999;
+	display: table;
+	position: relative;
+
+	width: 80%;
+	height: 15%;
+	min-width: 100px;
+
+	margin: auto;
+	top: -15%;
+
+	border-radius: 3%;
+	background: var(--button);
+	cursor: pointer;
+}
+
+#captureImageButtonText {
+	position: relative;
+	display: table-cell;
+
+	width: 200px;
+	height: 20px;
+
+	vertical-align: middle;
+
+	color: black;
+	font-family: Helvetica, sens-serif;
+	font-size: 1.5em;
+	text-align: center;
+}
+
+#video {
+	display: block;
+	margin: auto;
+	height: 100%;
+}
+
+#canvas {
+	display: none;
+	z-index: 1000;
+	position: absolute;
+	margin: auto;
+}
+
+/* --------------- RESULT VIEW ----------------------*/
 #resultView {
 	display: var(--resultViewDisplay);
 	position: relative;
@@ -233,102 +291,4 @@ label {
     background: var(--background);
     outline: none; 
     border: 0px;
-}
-
-
-/* --------------- CAMERA VIEW ----------------------*/
-#cameraView {
-	display: var(--cameraViewDisplay);
-	position: relative;
-	z-index: 998;
-
-	width: 100%;
-	height: 80%;
-
-	top: 20px;
-
-	background: var(--background)
-}
-
-#captureImageButton {
-	z-index: 999;
-	display: table;
-	position: relative;
-
-	width: 80%;
-	height: 15%;
-	min-width: 100px;
-
-	margin: auto;
-	top: -15%;
-
-	border-radius: 3%;
-	background: var(--button);
-	cursor: pointer;
-}
-
-#captureImageButtonText {
-	position: relative;
-	display: table-cell;
-
-	width: 200px;
-	height: 20px;
-
-	vertical-align: middle;
-
-	color: black;
-	font-family: Helvetica, sens-serif;
-	font-size: 1.5em;
-	text-align: center;
-}
-
-#infoBox {
-	display: var(--infoBoxDisplay);
-	width: 700px;
-	height: auto;
-
-	margin: auto;
-	margin-top: 10px;
-}
-
-
-#ambient_light {
-
-}
-
-.infoItem {
-	width: 700px;
-	height: auto;
-
-	margin-top: 10px;
-	padding-left: 5px;
-	padding-top: 5px;	
-
-	color: var(--text);
-	font-family: Helvetica, sens-serif;
-	font-size: 1.5em;
-
-	background: var(--infoBox);
-}
-
-#video {
-	display: block;
-	margin: auto;
-	height: 100%;
-}
-
-#canvas {
-	display: none;
-	z-index: 1000;
-	position: absolute;
-	margin: auto;
-}
-
-/* --------------- LOADING VIEW ----------------------*/
-#loadingView {
-	display: none;
-	position: relative;
-
-	width: 100%;
-	height: 80%;
 }

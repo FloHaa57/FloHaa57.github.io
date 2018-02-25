@@ -1,9 +1,6 @@
-
 :root {
 	--banner: #181818;
-	--headline: #F24738;
   	--background: #181818;
-  	--infoBox: #851934;
   	--detail1: #03A694;
   	--detail2: #F24738;
   	--text: #ADFF2F;
@@ -12,7 +9,6 @@
   	--startViewDisplay: block;
   	--resultViewDisplay: none;
   	--cameraViewDisplay: none;
-  	--infoBoxDisplay: none;
 }
 
 * {
@@ -121,7 +117,6 @@ body {
 }
 
 /* --------------- RESULT VIEW ----------------------*/
-
 #resultView {
 	display: var(--resultViewDisplay);
 	position: relative;
@@ -235,7 +230,6 @@ label {
 
 
 /* --------------- CAMERA VIEW ----------------------*/
-
 #cameraView {
 	display: var(--cameraViewDisplay);
 	position: relative;

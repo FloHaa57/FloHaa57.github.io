@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	initText();
+	screen.lockOrientation('portrait');
 });
 
 var WELCOME_TEXT = "Welcome to Snap Your Color </br></br></br> Press START to take a picture of your desired color. </br> Afterwards you get the RGB and HEX values of your color. </br> You can also change the brightness of the color using the slider below the values.";
@@ -21,6 +22,7 @@ function chooseStylesheet() {
 	document.getElementsByTagName("head")[0].appendChild(fileref);
 }
 
+// init the welcome text dependening on device type
 function initText() {
 	// using WURFL to decide which welcome text to show
 	if (WURFL.is_mobile === true && WURFL.form_factor === "Smartphone") {
@@ -123,8 +125,7 @@ function takeSnapshot() {
 	return rgb;
 }
 
-function calculateColor(imageData) {	
-
+function calculateColor(imageData) {
 	// iterate through pixels
 	var dataLength = imageData.length;
 	var i = 0;
@@ -177,6 +178,7 @@ function setResultValues(rgb, storeColor) {
 	$("#rgbOutput").val(rgb.r + ", " + rgb.g + ", " + rgb.b);
 	$("#hexOutput").val(rgbToHex(rgb.r, rgb.g, rgb.b));
 
+	// store the origin color to apply brightness updates on it
 	if(storeColor) {
 		$("#resultColorStore").html(rgb.r + "_" + rgb.g + "_" + rgb.b);
 
@@ -188,6 +190,7 @@ function setResultValues(rgb, storeColor) {
 	}	
 }
 
+// ------------- Utils for brightness change ----------
 function HSVtoRGB(h, s, v) {
     var r, g, b, i, f, p, q, t;
 

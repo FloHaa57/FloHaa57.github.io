@@ -11,18 +11,6 @@
   	--cameraViewDisplay: none;
 }
 
-/*@media screen and (orientation: landscape) {
-	html {
-	    transform: rotate(-90deg);
-	    transform-origin: left top;
-	    width: 100vh;
-	    overflow-x: hidden;
-	    position: absolute;
-	    top: 100%;
-	    left: 0;
-  	}
-}*/
-
 * {
 	margin: 0px;
 	padding: 0px;
@@ -290,4 +278,39 @@ label {
     background: var(--background);
     outline: none; 
     border: 0px;
+}
+
+@media screen and (orientation: landscape) {
+
+	#landscapeInfoText {
+		display: block;
+		position: relative;
+
+		width: 50%;
+		height: 50%;
+
+		top: 40%;
+		left: 25%;
+
+		color: var(--text);
+		font-family: Helvetica, sens-serif;
+		font-size: 1.3em;
+		text-align: center;
+	}
+
+	#banner {
+		display: none;
+	}
+
+	#startView {
+		display: none;
+	}
+
+	#cameraView {
+		display: none;
+	}
+
+	#resultView {
+		display: none;
+	}
 }

@@ -88,13 +88,13 @@ function errorCallback() {
 // **************** Main functionality ******************
 
 function showCameraView() {
-	$("#startView").fadeOut();
+	$("#startView").fadeOut(10);
 	startCameraStreaming();
 	$("#cameraView").fadeIn();
 }
 
 function captureImage() {
-	$("#cameraView").fadeOut();
+	$("#cameraView").fadeOut(10);
 
 	// capture image
 	var rgb = takeSnapshot();

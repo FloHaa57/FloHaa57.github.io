@@ -88,21 +88,23 @@ function errorCallback() {
 // **************** Main functionality ******************
 
 function showCameraView() {
-	$("#startView").fadeOut(10);
+	$("#startView").css("display", "none");
 	startCameraStreaming();
 	$("#cameraView").fadeIn();
 }
 
-function captureImage() {
-	$("#cameraView").fadeOut(10);
-
+function captureImage() {	
 	// capture image
 	var rgb = takeSnapshot();
 
 	// update values on screen
-	setResultValues(rgb, true);
+	setResultValues(rgb, true);	
 
+	// switch views
+	$("#cameraView").css("display", "none");
 	$("#resultView").fadeIn();
+
+	// set event listener
 	setAccelerometerEventListener();
 	setSliderEventListener();
 }

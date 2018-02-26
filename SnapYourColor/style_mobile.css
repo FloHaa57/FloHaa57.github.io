@@ -47,6 +47,10 @@ body {
 	padding-top: 0px;
 }
 
+#landscapeInfoText {
+	display: none;
+}
+
 /* --------------- START VIEW ----------------------*/
 #startView {
 	display: var(--startViewDisplay);
